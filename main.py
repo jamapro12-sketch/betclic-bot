@@ -1,3 +1,4 @@
+import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 from aiogram.types import Message
@@ -7,7 +8,11 @@ import logging
 # ====================== USTAWIENIA ======================
 logging.basicConfig(level=logging.INFO)
 
-BOT_TOKEN = "TWÓJ_TOKEN_TUTAJ"  # <--- ZMIEŃ NA SWOJĄ
+# Odczytujemy token z zmiennej środowiskowej Railway
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+
+if not BOT_TOKEN:
+    raise ValueError("Brak zmiennej BOT_TOKEN! Dodaj ją w Railway → Variables")
 
 bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
 dp = Dispatcher()
